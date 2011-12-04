@@ -1,0 +1,103 @@
+/*
+ * Copyright 2011 Google Inc.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+body, #canvas {
+	margin: 0;
+	font: 13px Arial, sans-serif;
+	width:168px;
+	height:168px;
+	noresize:true;
+	resize:none;
+	background:transparent;
+}
+
+#resultP {
+	font: Arial, sans-serif;
+	text-align:center;
+	color:#b44a11;
+	background:transparent;
+	font-size:300%;
+	position:relative;
+	top:43px;
+	resize:none;
+}
+
+#inputSingleRollTI {
+	background-color:#878a68;
+	background-opacity:0.3;
+	border-style:none;
+	color:#603937;
+	position:absolute;
+	top:88px;
+	left:39px;
+	width:90;
+	resize:none;
+}
+
+#rollsP {
+	font-size:60%;
+	text-align:center;
+	color:#603937;
+	background:transparent;
+	position:relative;
+	top:28px;
+	resize:none;
+}
+
+#showLogI {
+	position:absolute;
+	top:130px;
+	left:75px;
+}
+
+#singleRollI {
+	position:absolute;
+	top:9px;
+	left:5px;
+}
+
+#inputRollLogTI {
+	background-color:#878a68;
+	background-opacity:0.3;
+	border-style:none;
+	color:#603937;
+	position:absolute;
+	top:10px;
+	left:49px;
+	width:90;
+	resize:none;
+}
+
+#rollLogTA {
+	background:transparent;
+	border-style:none;
+	width:166;
+	height:130;
+	position:absolute;
+	top:30px;
+	left:12px;
+	resize:none;
+}
+
+#hideLogI {
+	position:absolute;
+	top:157px;
+	left:82px;
+}
+
+#multiRollI {
+	position:absolute;
+	top:9px;
+	left:8px;
+}

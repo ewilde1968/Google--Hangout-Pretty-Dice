@@ -1,0 +1,16 @@
+<!-- Copyright 2011 Google Inc. All Rights Reserved -->
+<Module>
+	<ModulePrefs title="Dice" height="200" width="550">
+		<Require feature="dynamic-height"/>
+		<Require feature="rpc"/>
+	</ModulePrefs>
+	<Content type="html">
+	<![CDATA[
+		<script type="text/javascript" src="//www.google.com/jsapi"></script> <script type="text/javascript">google.load("jquery", "1.4.1");</script> <script type="text/javascript" src="//hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=0.1"> </script>
+		<script type="text/javascript" src="//sites.google.com/site/ewilde1968testbed/home/dice/Dice.js"></script>
+		<script type="text/javascript" src="//sites.google.com/site/ewilde1968testbed/home/dice/Roll.js"></script>
+		<script type="text/javascript" src="//sites.google.com/site/ewilde1968testbed/home/dice/RollLogEntry.js"></script>
+		<link type="text/css" rel="stylesheet" href="//sites.google.com/site/ewilde1968testbed/home/dice/static/style.css" />
+	]]>
+	</Content>
+</Module>
