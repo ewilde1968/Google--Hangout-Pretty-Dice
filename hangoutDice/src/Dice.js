@@ -27,6 +27,52 @@
 var DEBUG = false;
 
 /**
+ * Syncs local copies of shared state with those on the server and renders the
+ *     app to reflect the changes.
+ * @param {!Array.<Object.<!string, *>>} add Entries added to the shared state.
+ * @param {!Array.<!string>} remove Entries removed from the shared state.
+ */
+function updateLocalStateData(add, remove) {
+	// Update the dynamic strings to show all rolls
+	//		rollLogTA
+	//		resultP
+	//		rollsP
+	for (var i = 0, iLen = add.length; i < iLen; ++i) {
+		switch( add[i].key) {
+		case "rollLogTA":
+			DOM_.rollLogTA.val( add[i].value);
+			break;
+		case "resultP":
+			DOM_.resultP.text( add[i].value);
+			break;
+		case "rollsP":
+			DOM_.rollsP.text( add[i].value);
+			break;
+		}
+	}
+
+	// nothing to do for remove
+}
+
+/**
+ * A list of the participants.
+ * @type {Array.<gapi.hangout.Participant>}
+ * @private
+ */
+var participants_ = null;
+var myName = null;
+
+/**
+ * Syncs local copy of the participants list with that on the server and renders
+ *     the app to reflect the changes.
+ * @param {!Array.<gapi.hangout.Participant>} participants The new list of
+ *     participants.
+ */
+function updateLocalParticipants(participants) {
+	participants_ = participants;
+}
+
+/**
  * A map of names to jQuery elements which compose the app.
  * @type {Object.<string, jQuery>}
  * @private
@@ -149,17 +195,51 @@ function SwitchViews( multiRoll) {
 	}
 }
 
+function AddToLog(inputStr) {
+	DOM_.rollLogTA.val( function(n,c) {
+		return inputStr + c;
+	});
+}
+
+function UpdateName() {
+	var myID = gapi.hangout.getParticipantId();
+	if( myID != null) {
+		var myParticipant = gapi.hangout.getParticipantById( myID);
+		if( myParticipant != null) {
+			myName = myParticipant.person.displayName;
+		}
+	}
+}
+
+
+function SaveSharedState() {
+    var state = {};
+    state["rollLogTA"] = DOM_.rollLogTA.val();
+    state["resultP"] = DOM_.resultP.text();
+    state["rollsP"] = DOM_.rollsP.text();
+	if (state) {
+	    gapi.hangout.data.submitDelta(state, null);
+	}
+}
+
 function SingleRoll() {
 	var y = DOM_.inputTI.val();
 	if( y != null & y.length > 0) {
+		// generate the roll
 		var roll = new Roll( y);
 		DOM_.resultP.text( roll.value);
 		DOM_.rollsP.text( roll.RollsString());
 
-		var entry = new RollLogEntry( y, roll);
-		DOM_.rollLogTA.val( function(n,c) {
-			return entry.toString() + c;
-		});
+		// update name
+		if( myName == null)
+			UpdateName();
+		
+		// update the roll log
+		var entry = new RollLogEntry( y, roll, myName);
+		AddToLog( entry.toString());
+
+		// save the shared state
+		SaveSharedState();
 	}
 }
 
@@ -181,11 +261,18 @@ function KeyDown(e)
  */
 (function() {
   if (gapi && gapi.hangout) {
-
     var initHangout = function(apiReadyEvent) {
       if (apiReadyEvent.isApiReady) {
         prepareAppDOM();
         SwitchViews( false);
+
+        gapi.hangout.data.onStateChanged.add(function(stateChangeEvent) {
+        	updateLocalStateData(stateChangeEvent.addedKeys,
+        			stateChangeEvent.removedKeys);
+        });
+        gapi.hangout.onParticipantsChanged.add(function(partChangeEvent) {
+        	updateLocalParticipants(partChangeEvent.participants);
+        });
 
         gapi.hangout.onApiReady.remove(initHangout);
       }

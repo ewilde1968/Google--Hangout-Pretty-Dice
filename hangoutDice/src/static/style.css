@@ -25,19 +25,19 @@ body, #canvas {
 #resultP {
 	font: Arial, sans-serif;
 	text-align:center;
-	color:#b44a11;
+	color:#203e42;
 	background:transparent;
-	font-size:300%;
+	font-size:400%;
 	position:relative;
-	top:43px;
+	top:30px;
 	resize:none;
 }
 
 #inputSingleRollTI {
-	background-color:#878a68;
+	background-color:#7e9899;
 	background-opacity:0.3;
 	border-style:none;
-	color:#603937;
+	color:#203e42;
 	position:absolute;
 	top:88px;
 	left:39px;
@@ -46,12 +46,12 @@ body, #canvas {
 }
 
 #rollsP {
-	font-size:60%;
+	font-size:80%;
 	text-align:center;
-	color:#603937;
+	color:#203e42;
 	background:transparent;
 	position:relative;
-	top:28px;
+	top:1px;
 	resize:none;
 }
 
@@ -68,10 +68,10 @@ body, #canvas {
 }
 
 #inputRollLogTI {
-	background-color:#878a68;
+	background-color:#7e9899;
 	background-opacity:0.3;
 	border-style:none;
-	color:#603937;
+	color:#203e42;
 	position:absolute;
 	top:10px;
 	left:49px;
@@ -86,7 +86,7 @@ body, #canvas {
 	height:130;
 	position:absolute;
 	top:30px;
-	left:12px;
+	left:10px;
 	resize:none;
 }
 
